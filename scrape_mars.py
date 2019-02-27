@@ -81,9 +81,12 @@ def scrape():
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup.prettify())
     mars_facts_df = pd.read_html(url)
-    mars_facts_df  
-    mars_facts_html = mars_facts_df.to_html(header=False, index=False)
-    #df.to_html(classes=None, border=None, justify=None)
+    #mars_facts_df
+    mars_facts = mars_facts_df[0]
+    mars_facts.columns = ["Item", "Measurements"]
+    mars_facts.set_index(["Item"])
+    mars_facts_html = mars_facts.to_html(classes=None, border=None, justify=None)
+
     mars_data ['mars_facts_html'] = mars_facts_html
 
     # ### Mars Hemispheres
